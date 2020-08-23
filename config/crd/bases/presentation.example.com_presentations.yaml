@@ -40,9 +40,24 @@ spec:
               description: Foo is an example field of Presentation. Edit Presentation_types.go
                 to remove/update
               type: string
+            size:
+              format: int32
+              type: integer
+          required:
+          - size
           type: object
         status:
           description: PresentationStatus defines the observed state of Presentation
+          properties:
+            nodes:
+              description: 'INSERT ADDITIONAL STATUS FIELD - define observed state
+                of cluster Important: Run "make" to regenerate code after modifying
+                this file Nodes are the names of the presentation pods'
+              items:
+                type: string
+              type: array
+          required:
+          - nodes
           type: object
       type: object
   version: v1
