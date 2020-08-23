@@ -18,6 +18,7 @@ package controllers
 
 import (
 	"context"
+	"reflect"
 
 	"github.com/go-logr/logr"
 	"github.com/prometheus/common/log"
@@ -85,7 +86,7 @@ func (r *PresentationReconciler) Reconcile(req ctrl.Request) (ctrl.Result, error
 	}
 
 	// Ensure the deployment size is the same as the spec
-	size := presentation.Spec.size
+	size := presentation.Spec.Size
 	if *found.Spec.Replicas != size {
 		found.Spec.Replicas = &size
 		err = r.Update(ctx, found)
@@ -95,6 +96,29 @@ func (r *PresentationReconciler) Reconcile(req ctrl.Request) (ctrl.Result, error
 		}
 		// Spec updated - return and requeue
 		return ctrl.Result{Requeue: true}, nil
+	}
+
+	// Update the Presentation status with the pod names
+	// List the pods for this Presentation's deployment
+	podList := &corev1.PodList{}
+	listOpts := []client.ListOption{
+		client.InNamespace(presentation.Namespace),
+		client.MatchingLabels(labelsForMemcached(presentation.Name)),
+	}
+	if err = r.List(ctx, podList, listOpts...); err != nil {
+		log.Error(err, "Failed to list pods", "Presentation.Namespace", presentation.Namespace, "Presentation.Name", presentation.Name)
+		return ctrl.Result{}, err
+	}
+	podNames := getPodNames(podList.Items)
+
+	// Update status.Nodes if needed
+	if !reflect.DeepEqual(podNames, presentation.Status.Nodes) {
+		presentation.Status.Nodes = podNames
+		err := r.Status().Update(ctx, presentation)
+		if err != nil {
+			log.Error(err, "Failed to update Presentation status")
+			return ctrl.Result{}, err
+		}
 	}
 
 	return ctrl.Result{}, nil
@@ -147,7 +171,7 @@ func (r *PresentationReconciler) deploymentForPresentation(m *presentationv1.Pre
 			},
 		},
 	}
-	// Set Memcached instance as the owner and controller
+	// Set Presentation instance as the owner and controller
 	ctrl.SetControllerReference(m, dep, r.Scheme)
 	return dep
 }

@@ -37,6 +37,8 @@ type PresentationSpec struct {
 type PresentationStatus struct {
 	// INSERT ADDITIONAL STATUS FIELD - define observed state of cluster
 	// Important: Run "make" to regenerate code after modifying this file
+	// Nodes are the names of the presentation pods
+	Nodes []string `json:"nodes"`
 }
 
 // +kubebuilder:object:root=true
