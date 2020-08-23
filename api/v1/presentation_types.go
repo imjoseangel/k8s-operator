@@ -30,6 +30,7 @@ type PresentationSpec struct {
 
 	// Foo is an example field of Presentation. Edit Presentation_types.go to remove/update
 	Markdown string `json:"markdown,omitempty"`
+	Size     int32  `json:"size"`
 }
 
 // PresentationStatus defines the observed state of Presentation
