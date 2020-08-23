@@ -1,0 +1,7 @@
+domain: presentation.example.com
+repo: github.com/imjoseangel/k8s-operator
+resources:
+- group: presentation
+  kind: Presentation
+  version: v2
+version: "2"
