@@ -127,6 +127,7 @@ func (r *PresentationReconciler) Reconcile(req ctrl.Request) (ctrl.Result, error
 func (r *PresentationReconciler) SetupWithManager(mgr ctrl.Manager) error {
 	return ctrl.NewControllerManagedBy(mgr).
 		For(&presentationv1.Presentation{}).
+		Owns(&appsv1.Deployment{}).
 		Complete(r)
 }
 
@@ -140,7 +141,7 @@ func getPodNames(pods []corev1.Pod) []string {
 }
 
 func (r *PresentationReconciler) deploymentForPresentation(m *presentationv1.Presentation) *appsv1.Deployment {
-	ls := labelsForMemcached(m.Name)
+	ls := labelsForPresentation(m.Name)
 	replicas := m.Spec.Size
 
 	dep := &appsv1.Deployment{
@@ -174,4 +175,10 @@ func (r *PresentationReconciler) deploymentForPresentation(m *presentationv1.Pre
 	// Set Presentation instance as the owner and controller
 	ctrl.SetControllerReference(m, dep, r.Scheme)
 	return dep
+}
+
+// labelsForPresentation returns the labels for selecting the resources
+// belonging to the given presentation CR name.
+func labelsForPresentation(name string) map[string]string {
+	return map[string]string{"app": "presentation", "presentation_cr": name}
 }
