@@ -21,7 +21,6 @@ import (
 	"reflect"
 
 	"github.com/go-logr/logr"
-	"github.com/prometheus/common/log"
 	"k8s.io/apimachinery/pkg/api/errors"
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/types"
@@ -46,7 +45,7 @@ type PresentationReconciler struct {
 
 func (r *PresentationReconciler) Reconcile(req ctrl.Request) (ctrl.Result, error) {
 	ctx := context.Background()
-	_ = r.Log.WithValues("presentation", req.NamespacedName)
+	log := r.Log.WithValues("presentation", req.NamespacedName)
 
 	// your logic here
 	// Fetch the Presentation instance
@@ -103,7 +102,7 @@ func (r *PresentationReconciler) Reconcile(req ctrl.Request) (ctrl.Result, error
 	podList := &corev1.PodList{}
 	listOpts := []client.ListOption{
 		client.InNamespace(presentation.Namespace),
-		client.MatchingLabels(labelsForMemcached(presentation.Name)),
+		client.MatchingLabels(labelsForPresentation(presentation.Name)),
 	}
 	if err = r.List(ctx, podList, listOpts...); err != nil {
 		log.Error(err, "Failed to list pods", "Presentation.Namespace", presentation.Namespace, "Presentation.Name", presentation.Name)
@@ -160,14 +159,27 @@ func (r *PresentationReconciler) deploymentForPresentation(m *presentationv1.Pre
 				},
 				Spec: corev1.PodSpec{
 					Containers: []corev1.Container{{
-						Image:   "memcached:1.4.36-alpine",
-						Name:    "memcached",
-						Command: []string{"memcached", "-m=64", "-o", "modern", "-v"},
-						Ports: []corev1.ContainerPort{{
-							ContainerPort: 11211,
-							Name:          "memcached",
-						}},
+						Image: "imjoseangel/presentation",
+						Name:  "presentation",
+						VolumeMounts: []corev1.VolumeMount{
+							{
+								Name:      m.Name,
+								MountPath: "/config",
+							},
+						},
 					}},
+					Volumes: []corev1.Volume{
+						{
+							Name: m.Name,
+							VolumeSource: corev1.VolumeSource{
+								ConfigMap: &corev1.ConfigMapVolumeSource{
+									LocalObjectReference: corev1.LocalObjectReference{
+										Name: m.Name + "-config",
+									},
+								},
+							},
+						},
+					},
 				},
 			},
 		},
