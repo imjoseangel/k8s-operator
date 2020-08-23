@@ -1,0 +1,3 @@
+domain: example.com
+repo: github.com/imjoseangel/k8s-operator
+version: "2"
