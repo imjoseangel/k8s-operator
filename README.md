@@ -20,16 +20,47 @@ operator-sdk version: "v1.0.0", commit: "d7d5e0cd6cf5468bb66e0849f08fda5bf557f4f
 ### Create and Initialize the Project
 
 ```bash
-mkdir ~/k8s-operator && cd ~/k8s-operator/
+$ mkdir ~/k8s-operator && cd ~/k8s-operator/
 
-operator-sdk init --project-version="2" --repo github.com/imjoseangel/k8s-operator --owner "imjoseangel" --domain example.com
+$ operator-sdk init --project-version="2" --repo github.com/imjoseangel/k8s-operator --owner "imjoseangel" --domain example.com
 ```
 
 ### Create the API
 
 ```bash
-operator-sdk create api --kind Presentation --group presentation --version v2
+$ operator-sdk create api --kind Presentation --group presentation --version v2
 ```
+
+### Define the API
+
+This command specifies that the CRD will be called **Presentation** and creates the file **api/v1/presentation_types.go**, which you can modify to specify the input parameter of your CRD. For this example application, you need only one parameter, called **Markdown**:
+
+```go
+// PresentationSpec defines the desired state of Presentation
+type PresentationSpec struct {
+	// INSERT ADDITIONAL SPEC FIELDS - desired state of cluster
+	// Important: Run "make" to regenerate code after modifying this file
+
+	// Foo is an example field of Presentation. Edit Presentation_types.go to remove/update
+	Markdown string `json:"markdown,omitempty"`
+}
+```
+
+After modifying the `*_types.go` file always run the following command to update the generated code for that resource type
+
+```bash
+$ make generate
+```
+
+### Generating CRD manifests
+
+Once the API is defined with spec/status fields and CRD validation markers, the CRD manifests can be generated and updated with the following command:
+
+```bash
+$ make manifests
+```
+
+This makefile target will invoke controller-gen to generate the CRD manifests at `config/crd/bases/presentation.example.com_presentations.yaml`.
 
 ### Configure the test environment
 
