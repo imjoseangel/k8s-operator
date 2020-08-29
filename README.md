@@ -22,18 +22,18 @@ operator-sdk version: "v1.0.0", commit: "d7d5e0cd6cf5468bb66e0849f08fda5bf557f4f
 ```bash
 $ mkdir ~/k8s-operator && cd ~/k8s-operator/
 
-$ operator-sdk init --project-version="2" --repo github.com/imjoseangel/k8s-operator --owner "imjoseangel" --domain example.com
+$ operator-sdk init --plugins=ansible.sdk.operatorframework.io/v1 --domain example.com
 ```
 
 ### Create the API
 
 ```bash
-$ operator-sdk create api --kind Presentation --group presentation --version v2
+$ operator-sdk create api --group apps --version v1alpha1 --kind AppService --generate-role --generate-playbook
 ```
 
 ### Define the API
 
-This command specifies that the CRD will be called **Presentation** and creates the file **api/v1/presentation_types.go**, which you can modify to specify the input parameter of your CRD. For this example application, you need only one parameter, called **Markdown**:
+This command specifies that the CRD will be called **AppService** and creates the file **api/v1/presentation_types.go**, which you can modify to specify the input parameter of your CRD. For this example application, you need only one parameter, called **Markdown**:
 
 ```go
 // PresentationSpec defines the desired state of Presentation

@@ -1,7 +1,0 @@
-apiVersion: presentation.example.com/v1
-kind: Presentation
-metadata:
-  name: presentation-sample
-spec:
-  # Add fields here
-  foo: bar
