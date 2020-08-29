@@ -1,0 +1,6 @@
+apiVersion: apps.example.com/v1alpha1
+kind: AppService
+metadata:
+  name: appservice-sample
+spec:
+  foo: bar

@@ -33,7 +33,7 @@ $ operator-sdk create api --group apps --version v1alpha1 --kind AppService --ge
 
 ### Define the API
 
-This command specifies that the CRD will be called **AppService** and creates the file **api/v1/presentation_types.go**, which you can modify to specify the input parameter of your CRD. For this example application, you need only one parameter, called **Markdown**:
+This command specifies that the CRD will be called **AppService** and creates the role **roles/appservice**, which you can modify to specify the input parameter of your CRD:
 
 ```go
 // PresentationSpec defines the desired state of Presentation

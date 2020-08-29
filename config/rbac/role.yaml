@@ -37,4 +37,20 @@ rules:
       - patch
       - update
       - watch
+  ##
+  ## Rules for apps.example.com/v1alpha1, Kind: AppService
+  ##
+  - apiGroups:
+      - apps.example.com
+    resources:
+      - appservices
+      - appservices/status
+    verbs:
+      - create
+      - delete
+      - get
+      - list
+      - patch
+      - update
+      - watch
 # +kubebuilder:scaffold:rules
