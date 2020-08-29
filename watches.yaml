@@ -3,5 +3,5 @@
 - version: v1alpha1
   group: cache.example.com
   kind: Memcached
-  playbook: playbooks/memcached.yml
+  role: memcached
 # +kubebuilder:scaffold:watch
