@@ -1,6 +1,6 @@
 domain: example.com
 layout: ansible.sdk.operatorframework.io/v1
-projectName: k8s-operator
+projectName: memcached-operator
 resources:
 - group: cache
   kind: Memcached
