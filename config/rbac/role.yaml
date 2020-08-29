@@ -38,13 +38,13 @@ rules:
       - update
       - watch
   ##
-  ## Rules for apps.example.com/v1alpha1, Kind: AppService
+  ## Rules for cache.example.com/v1alpha1, Kind: Memcached
   ##
   - apiGroups:
-      - apps.example.com
+      - cache.example.com
     resources:
-      - appservices
-      - appservices/status
+      - memcacheds
+      - memcacheds/status
     verbs:
       - create
       - delete

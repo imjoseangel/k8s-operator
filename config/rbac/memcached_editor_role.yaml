@@ -1,13 +1,13 @@
-# permissions for end users to edit appservices.
+# permissions for end users to edit memcacheds.
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  name: appservice-editor-role
+  name: memcached-editor-role
 rules:
 - apiGroups:
-  - apps.example.com
+  - cache.example.com
   resources:
-  - appservices
+  - memcacheds
   verbs:
   - create
   - delete
@@ -17,8 +17,8 @@ rules:
   - update
   - watch
 - apiGroups:
-  - apps.example.com
+  - cache.example.com
   resources:
-  - appservices/status
+  - memcacheds/status
   verbs:
   - get

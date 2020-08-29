@@ -6,4 +6,6 @@
     - operator_sdk.util
   tasks:
     - import_role:
-        name: "appservice"
+        name: "memcached"
+      vars:
+        size: 3

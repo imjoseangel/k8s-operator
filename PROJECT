@@ -2,7 +2,7 @@ domain: example.com
 layout: ansible.sdk.operatorframework.io/v1
 projectName: k8s-operator
 resources:
-- group: apps
-  kind: AppService
+- group: cache
+  kind: Memcached
   version: v1alpha1
 version: 3-alpha

@@ -1,20 +1,20 @@
-# permissions for end users to view appservices.
+# permissions for end users to view memcacheds.
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  name: appservice-viewer-role
+  name: memcached-viewer-role
 rules:
 - apiGroups:
-  - apps.example.com
+  - cache.example.com
   resources:
-  - appservices
+  - memcacheds
   verbs:
   - get
   - list
   - watch
 - apiGroups:
-  - apps.example.com
+  - cache.example.com
   resources:
-  - appservices/status
+  - memcacheds/status
   verbs:
   - get
