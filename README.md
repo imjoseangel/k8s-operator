@@ -1,6 +1,4 @@
-# k8s-operator
-
-Kubernetes Operator - Golang
+# Ansible Kubernetes Operator
 
 ## How to run on Mac
 
