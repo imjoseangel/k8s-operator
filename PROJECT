@@ -1,0 +1,8 @@
+domain: example.com
+layout: ansible.sdk.operatorframework.io/v1
+projectName: restapi-operator
+resources:
+- group: restapi
+  kind: Restapi
+  version: v1alpha1
+version: 3-alpha
