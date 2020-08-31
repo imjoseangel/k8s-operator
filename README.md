@@ -3,6 +3,7 @@
 ## How to run on Mac
 
 ### Install with brew
+
 ```bash
 brew install operator-sdk
 ```
@@ -18,9 +19,8 @@ operator-sdk version: "v1.0.0", commit: "d7d5e0cd6cf5468bb66e0849f08fda5bf557f4f
 ### Create and Initialize the Project
 
 ```bash
-$ mkdir ~/k8s-operator && cd ~/k8s-operator/
-
-$ operator-sdk init --plugins=ansible --domain example.com
+mkdir ~/memcached-operator  && cd ~/memcached-operator/
+operator-sdk init --plugins=ansible --domain example.com
 ```
 
 ### Create the API
@@ -104,13 +104,13 @@ make docker-build docker-push IMG=$IMG
 
 ### Run the Operator
 
-### Apply the Memcached Kind (CRD):
+### Apply the Memcached Kind (CRD)
 
 ```bash
 make install
 ```
 
-### Deploy the operator:
+### Deploy the operator
 
 ```bash
 export IMG=docker.io/imjoseangel/memcached-operator:v1
