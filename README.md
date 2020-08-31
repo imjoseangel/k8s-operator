@@ -19,7 +19,7 @@ operator-sdk version: "v1.0.0", commit: "d7d5e0cd6cf5468bb66e0849f08fda5bf557f4f
 ### Create and Initialize the Project
 
 ```bash
-mkdir ~/memcached-operator  && cd ~/memcached-operator/
+mkdir ~/restapi-operator  && cd ~/restapi-operator/
 operator-sdk init --plugins=ansible --domain example.com
 ```
 
