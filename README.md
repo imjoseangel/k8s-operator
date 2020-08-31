@@ -183,3 +183,7 @@ Run the following command to check the operator logs.
 ```bash
 kubectl logs deployment.apps/memcached-operator-controller-manager -n memcached-operator-system -c manager
 ```
+
+## More Info
+
+[Tutorial](https://learn.openshift.com/ansibleop/ansible-operator-overview/?extIdCarryOver=true&intcmp=701f20000012k6TAAQ&sc_cid=701f2000001Css5AAC)
