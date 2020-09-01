@@ -26,7 +26,7 @@ operator-sdk init --plugins=ansible --domain example.com
 ### Create the API
 
 ```bash
-$ operator-sdk create api --group restapi --version v1alpha1 --kind Restapi --generate-role
+operator-sdk create api --group api --version v1alpha1 --kind Restapi --generate-role
 ```
 
 ### Modify the Manager
@@ -99,7 +99,7 @@ Add the defaults to `roles/restapi/defaults/main.yml`
 size: 1
 ```
 
-And update the file `config/samples/cache_v1alpha1_restapi.yaml`
+And update the file `config/samples/api_v1alpha1_restapi.yaml`
 
 ```yaml
 ---
@@ -155,7 +155,7 @@ kubectl get deployment -n restapi-operator-system
 ### Create a restapi resource
 
 ```bash
-kubectl apply -f config/samples/restapi_v1alpha1_restapi.yaml -n restapi-operator-system
+kubectl apply -f config/samples/api_v1alpha1_restapi.yaml -n restapi-operator-system
 ```
 
 Verify that restapi pods are created
@@ -196,7 +196,7 @@ replicaset.apps/restapi-sample-restapi-b885dcc75                   3         3  
 To leave the operator, but remove the restapi sample pods, delete the CR.
 
 ```bash
-kubectl delete -f config/samples/cache_v1alpha1_restapi.yaml -n restapi-operator-system
+kubectl delete -f config/samples/api_v1alpha1_restapi.yaml -n restapi-operator-system
 ```
 
 To clean up everything:
