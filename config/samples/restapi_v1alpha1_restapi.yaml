@@ -1,6 +1,0 @@
-apiVersion: restapi.example.com/v1alpha1
-kind: Restapi
-metadata:
-  name: restapi-sample
-spec:
-  size: 1
