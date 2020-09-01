@@ -164,31 +164,31 @@ Verify that restapi pods are created
 kubectl get pods -n restapi-operator-system
 
 NAME                                                     READY   STATUS    RESTARTS   AGE
-restapi-operator-controller-manager-5d95cd576f-npmcl   2/2     Running   0          30s
-restapi-sample-restapi-b885dcc75-69k8d                 1/1     Running   0          21s
-restapi-sample-restapi-b885dcc75-8s66v                 1/1     Running   0          21s
-restapi-sample-restapi-b885dcc75-s9blm                 1/1     Running   0          21s
+restapi-operator-controller-manager-5d95cd576f-npmcl     2/2     Running   0          30s
+restapi-sample-restapi-b885dcc75-69k8d                   1/1     Running   0          21s
+restapi-sample-restapi-b885dcc75-8s66v                   1/1     Running   0          21s
+restapi-sample-restapi-b885dcc75-s9blm                   1/1     Running   0          21s
 
 
 kubectl get all -n restapi-operator-system
 
 
 NAME                                                         READY   STATUS    RESTARTS   AGE
-pod/restapi-operator-controller-manager-5d95cd576f-npmcl   2/2     Running   0          66s
-pod/restapi-sample-restapi-b885dcc75-69k8d                 1/1     Running   0          57s
-pod/restapi-sample-restapi-b885dcc75-8s66v                 1/1     Running   0          57s
-pod/restapi-sample-restapi-b885dcc75-s9blm                 1/1     Running   0          57s
+pod/restapi-operator-controller-manager-5d95cd576f-npmcl     2/2     Running   0          66s
+pod/restapi-sample-restapi-b885dcc75-69k8d                   1/1     Running   0          57s
+pod/restapi-sample-restapi-b885dcc75-8s66v                   1/1     Running   0          57s
+pod/restapi-sample-restapi-b885dcc75-s9blm                   1/1     Running   0          57s
 
 NAME                                                            TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)    AGE
-service/restapi-operator-controller-manager-metrics-service   ClusterIP   10.0.5.131   <none>        8443/TCP   68s
+service/restapi-operator-controller-manager-metrics-service     ClusterIP   10.0.5.131   <none>        8443/TCP   68s
 
 NAME                                                    READY   UP-TO-DATE   AVAILABLE   AGE
-deployment.apps/restapi-operator-controller-manager   1/1     1            1           67s
-deployment.apps/restapi-sample-restapi                3/3     3            3           58s
+deployment.apps/restapi-operator-controller-manager     1/1     1            1           67s
+deployment.apps/restapi-sample-restapi                  3/3     3            3           58s
 
 NAME                                                               DESIRED   CURRENT   READY   AGE
-replicaset.apps/restapi-operator-controller-manager-5d95cd576f   1         1         1       67s
-replicaset.apps/restapi-sample-restapi-b885dcc75                 3         3         3       58s
+replicaset.apps/restapi-operator-controller-manager-5d95cd576f     1         1         1       67s
+replicaset.apps/restapi-sample-restapi-b885dcc75                   3         3         3       58s
 ```
 
 ### Cleanup
