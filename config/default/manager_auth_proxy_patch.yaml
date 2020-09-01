@@ -19,8 +19,22 @@ spec:
         ports:
         - containerPort: 8443
           name: https
+        resources:
+          requests: # minimum resources required
+            cpu: 250m
+            memory: 64Mi
+          limits: # maximum resources allocated
+            cpu: 500m
+            memory: 256Mi
       - name: manager
         args:
         - "--metrics-addr=127.0.0.1:8080"
         - "--enable-leader-election"
         - "--leader-election-id=restapi-operator"
+        resources:
+          requests: # minimum resources required
+            cpu: 250m
+            memory: 64Mi
+          limits: # maximum resources allocated
+            cpu: 500m
+            memory: 256Mi
