@@ -20,5 +20,21 @@
             containers:
             - name: restapi
               image: "docker.io/imjoseangel/restapi:latest"
+              imagePullPolicy: Always
               ports:
                 - containerPort: 5000
+              resources:
+                requests: # minimum resources required
+                  cpu: 250m
+                  memory: 64Mi
+                limits: # maximum resources allocated
+                  cpu: 500m
+                  memory: 256Mi
+              readinessProbe: # is the container ready to receive traffic?
+                httpGet:
+                  port: 5000
+                  path: /
+              livenessProbe: # is the container healthy?
+                httpGet:
+                  port: 5000
+                  path: /
