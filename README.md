@@ -74,21 +74,6 @@ Update the file `roles/restapi/tasks/main.yml:`
                 httpGet:
                   port: 5000
                   path: /
-
-      kind: Service
-      apiVersion: v1
-      metadata:
-        name: '{{ ansible_operator_meta.name }}-restapi'
-        namespace: '{{ ansible_operator_meta.namespace }}'
-      spec:
-        selector:
-          app: restapi
-        ports:
-        - protocol: TCP
-          port: 80
-          targetPort: 5000
-        type: ClusterIP
-
 ```
 
 Add the defaults to `roles/restapi/defaults/main.yml`
